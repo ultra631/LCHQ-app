@@ -11,3 +11,6 @@ desktop.ini
 # Logs / divers
 *.log
 node_modules/
+
+# Claude Code (config locale)
+.claude/settings.local.json

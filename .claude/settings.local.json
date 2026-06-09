@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(Start-Process \"C:\\\\Users\\\\dompi\\\\LCHQ-app\\\\index.html\")"
-    ]
-  }
-}
