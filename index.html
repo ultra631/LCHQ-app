@@ -4,8 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LCHQ — Ligue de Hockey</title>
-  <meta name="description" content="Portail officiel de la LCHQ : règlements, équipes et infos de la ligue." />
+  <meta name="description" content="Portail officiel de la LCHQ : statistiques, règlements, inscriptions et infos de la ligue." />
   <link rel="icon" href="public/logos/logo2.png" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0a0e1a" />
+  <link rel="apple-touch-icon" href="public/logos/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LCHQ" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Anton&display=swap" rel="stylesheet" />
@@ -146,6 +154,105 @@
     .doc-meta { color: var(--muted); font-size: .9rem; flex: 1; }
     .doc-card .btn { align-self: flex-start; }
 
+    /* ---------- Bouton large ---------- */
+    .btn-lg { font-size: 1.2rem; padding: 18px 34px; border-radius: 10px; }
+    .btn-ghost { background: transparent; border: 2px solid var(--red); color: var(--text); }
+    .btn-ghost:hover { background: var(--red); }
+
+    /* ---------- Statistiques (CTA) ---------- */
+    .stats-cta {
+      background: linear-gradient(135deg, rgba(224,30,55,.14), rgba(200,16,46,.05));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 48px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .stats-cta .section-title::after { margin-inline: auto; }
+
+    /* ---------- Inscriptions ---------- */
+    .ins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .ins-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: center;
+      align-items: center;
+      transition: transform .18s, border-color .2s;
+    }
+    .ins-card:hover { transform: translateY(-4px); border-color: var(--red); }
+    .ins-card h3 { font-size: 1.3rem; }
+
+    /* ---------- Équipe de gestion ---------- */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+    .team-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      text-align: center;
+      transition: transform .18s, border-color .2s;
+    }
+    .team-card:hover { transform: translateY(-4px); border-color: var(--red); }
+    .team-avatar {
+      width: 72px; height: 72px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(224,30,55,.14);
+      color: var(--red);
+      font-family: 'Anton', sans-serif;
+      font-size: 1.6rem;
+    }
+    .team-card h3 { font-size: 1.15rem; }
+    .team-card .role { color: var(--red); font-weight: 600; font-size: .9rem; text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
+
+    /* ---------- Communauté / Réseaux ---------- */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: transform .18s, border-color .2s, background .2s;
+    }
+    .social-card:hover { transform: translateY(-4px); }
+    .social-card svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .social-card span small { display: block; font-weight: 400; font-size: .8rem; color: var(--muted); }
+    .social-card.twitch:hover { border-color: #9146ff; background: rgba(145,70,255,.1); }
+    .social-card.twitch svg { color: #9146ff; }
+    .social-card.discord:hover { border-color: #5865f2; background: rgba(88,101,242,.1); }
+    .social-card.discord svg { color: #5865f2; }
+    .social-card.facebook:hover { border-color: #1877f2; background: rgba(24,119,242,.1); }
+    .social-card.facebook svg { color: #1877f2; }
+
+    /* ---------- Bouton d'installation PWA ---------- */
+    #installBtn { display: none; }
+
     /* ---------- Footer ---------- */
     footer {
       border-top: 1px solid var(--border);
@@ -171,8 +278,11 @@
         <span>LCHQ</span>
       </a>
       <ul>
+        <li><a href="#statistiques">Statistiques</a></li>
+        <li><a href="#inscriptions">Inscriptions</a></li>
         <li><a href="#reglements">Règlements</a></li>
-        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#gestion">Gestion</a></li>
+        <li><a href="#communaute">Communauté</a></li>
       </ul>
     </nav>
   </header>
@@ -184,6 +294,52 @@
       <div class="hero-overlay">
         <h1>Ligue de Hockey LCHQ</h1>
         <p>Saison 5 — Hockey. Passion.</p>
+      </div>
+    </section>
+
+    <!-- STATISTIQUES -->
+    <section id="statistiques">
+      <div class="container">
+        <div class="stats-cta">
+          <h2 class="section-title">Statistiques</h2>
+          <p class="section-sub" style="margin-bottom:0;">Pointage des joueurs, classements et statistiques complètes de la ligue, mis à jour en direct.</p>
+          <a class="btn btn-lg" href="https://ultra631.github.io/LCHQ/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Voir les statistiques
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSCRIPTIONS -->
+    <section id="inscriptions" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+      <div class="container">
+        <h2 class="section-title">Inscriptions</h2>
+        <p class="section-sub">Inscris-toi pour la prochaine saison. Remplis le formulaire qui te concerne.</p>
+
+        <div class="ins-grid">
+          <article class="ins-card">
+            <div class="doc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+            <h3>Inscription joueur</h3>
+            <p class="doc-meta">Formulaire d'inscription individuel pour rejoindre la ligue.</p>
+            <!-- TODO: remplacer par l'URL Jotform réelle -->
+            <a class="btn" href="#" data-jotform="joueur" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              S'inscrire
+            </a>
+          </article>
+
+          <article class="ins-card">
+            <div class="doc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Inscription équipe</h3>
+            <p class="doc-meta">Formulaire pour inscrire une équipe complète à la ligue.</p>
+            <!-- TODO: remplacer par l'URL Jotform réelle -->
+            <a class="btn" href="#" data-jotform="equipe" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Inscrire mon équipe
+            </a>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -221,11 +377,67 @@
       </div>
     </section>
 
+    <!-- ÉQUIPE DE GESTION -->
+    <section id="gestion" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+      <div class="container">
+        <h2 class="section-title">Équipe de gestion</h2>
+        <p class="section-sub">Les personnes qui font tourner la ligue au quotidien.</p>
+
+        <div class="team-grid">
+          <!-- TODO: remplacer par les vrais noms/rôles de l'équipe -->
+          <article class="team-card">
+            <div class="team-avatar">?</div>
+            <h3>Nom Prénom</h3>
+            <p class="role">Président</p>
+          </article>
+          <article class="team-card">
+            <div class="team-avatar">?</div>
+            <h3>Nom Prénom</h3>
+            <p class="role">Vice-président</p>
+          </article>
+          <article class="team-card">
+            <div class="team-avatar">?</div>
+            <h3>Nom Prénom</h3>
+            <p class="role">Directeur des opérations</p>
+          </article>
+          <article class="team-card">
+            <div class="team-avatar">?</div>
+            <h3>Nom Prénom</h3>
+            <p class="role">Responsable des statistiques</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- À PROPOS -->
     <section id="apropos" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
       <div class="container">
         <h2 class="section-title">À propos</h2>
         <p class="section-sub" style="max-width:70ch;">La LCHQ est une ligue de hockey passionnée. Ce portail regroupe les informations officielles de la ligue. D'autres sections (calendrier, classements, équipes) seront ajoutées prochainement.</p>
+      </div>
+    </section>
+
+    <!-- COMMUNAUTÉ / RÉSEAUX -->
+    <section id="communaute">
+      <div class="container">
+        <h2 class="section-title">Communauté</h2>
+        <p class="section-sub">Suis la ligue en direct et rejoins la communauté sur nos réseaux.</p>
+
+        <div class="social-grid">
+          <!-- TODO: remplacer href="#" par les vrais liens -->
+          <a class="social-card twitch" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+            <span>Twitch<small>Matchs en direct</small></span>
+          </a>
+          <a class="social-card discord" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.369A19.79 19.79 0 0 0 16.558 3.2a14.65 14.65 0 0 0-.637 1.307 18.27 18.27 0 0 0-5.487 0A14.5 14.5 0 0 0 9.8 3.2a19.74 19.74 0 0 0-3.76 1.169C2.61 8.32 1.872 12.16 2.24 15.95a19.94 19.94 0 0 0 6.06 3.06 14.65 14.65 0 0 0 1.293-2.103 12.9 12.9 0 0 1-2.04-.978c.171-.125.339-.255.5-.388a14.24 14.24 0 0 0 12.115 0c.164.135.331.265.5.388-.65.385-1.337.71-2.043.98a14.5 14.5 0 0 0 1.293 2.1 19.9 19.9 0 0 0 6.063-3.058c.43-4.397-.736-8.2-3.08-11.583ZM8.55 13.65c-1.183 0-2.157-1.085-2.157-2.42s.952-2.421 2.156-2.421 2.178 1.096 2.157 2.42c0 1.336-.953 2.42-2.157 2.42Zm6.9 0c-1.183 0-2.157-1.085-2.157-2.42s.952-2.421 2.157-2.421 2.177 1.096 2.156 2.42c0 1.336-.94 2.42-2.156 2.42Z"/></svg>
+            <span>Discord<small>Rejoindre le serveur</small></span>
+          </a>
+          <a class="social-card facebook" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+            <span>Facebook<small>Page officielle</small></span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -236,12 +448,48 @@
         <img src="public/logos/logo2.png" alt="Logo LCHQ" />
         <span>LCHQ</span>
       </div>
-      <p>&copy; <span id="year"></span> Ligue de Hockey LCHQ — Tous droits réservés.</p>
+      <p style="margin-bottom:16px;">&copy; <span id="year"></span> Ligue de Hockey LCHQ — Tous droits réservés.</p>
+      <button id="installBtn" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Installer l'application
+      </button>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---------- PWA : enregistrement du service worker ----------
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch((err) => {
+          console.warn('Échec de l\'enregistrement du service worker :', err);
+        });
+      });
+    }
+
+    // ---------- PWA : bouton d'installation ----------
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-flex';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+      deferredPrompt = null;
+    });
   </script>
 </body>
 </html>

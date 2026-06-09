@@ -1,0 +1,32 @@
+{
+  "name": "LCHQ — Ligue de Hockey",
+  "short_name": "LCHQ",
+  "description": "Portail officiel de la LCHQ : statistiques, règlements, inscriptions et infos de la ligue.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "public/logos/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "public/logos/logo2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "public/logos/logo2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
